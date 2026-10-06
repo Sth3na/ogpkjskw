@@ -1,0 +1,5 @@
+# Tus imágenes y sonidos se quedan en tu equipo y no se suben al repositorio.
+assets/**
+!assets/
+!assets/LISTA.md
+!assets/LEEME.md

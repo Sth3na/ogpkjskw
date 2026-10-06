@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naruto Online HTML5 · Revisión de assets</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Revisión de assets</h1>
+    <nav><a href="index.html">Combate</a> <a href="revision.html" class="on">Revisión de assets</a></nav>
+  </header>
+  <main>
+    <p>Todo lo que el juego busca dentro de la carpeta <code>assets/</code>. Lo que falte se dibuja con un marcador de posición.</p>
+    <p id="summary" class="muted">Comprobando archivos…</p>
+    <label class="muted"><input type="checkbox" id="only-missing"> Mostrar solo los que faltan</label>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Vista</th><th>Estado</th><th>Ruta</th><th>Qué es</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="js/data.js"></script>
+  <script src="js/assets.js"></script>
+  <script>
+    Assets.load(NINJAS).then((manifest) => {
+      const rows = document.getElementById('rows');
+      let found = 0;
+      for (const a of manifest) {
+        const it = Assets.items[a.key];
+        if (it.loaded) found++;
+        const tr = document.createElement('tr');
+        tr.dataset.loaded = it.loaded;
+        const preview = document.createElement('td');
+        if (it.loaded && a.kind === 'image') {
+          const img = document.createElement('img');
+          img.className = 'thumb';
+          img.src = it.src;
+          preview.appendChild(img);
+        } else if (it.loaded) {
+          const btn = document.createElement('button');
+          btn.textContent = '▶';
+          btn.onclick = () => Assets.play(a.key);
+          preview.appendChild(btn);
+        } else {
+          preview.textContent = '—';
+        }
+        tr.appendChild(preview);
+        const state = document.createElement('td');
+        state.textContent = it.loaded ? 'Cargado' : 'Falta';
+        state.className = it.loaded ? 'ok' : 'bad';
+        tr.appendChild(state);
+        const path = document.createElement('td');
+        path.innerHTML = '<code></code>';
+        path.firstChild.textContent = 'assets/' + a.path;
+        tr.appendChild(path);
+        const desc = document.createElement('td');
+        desc.textContent = a.desc;
+        tr.appendChild(desc);
+        rows.appendChild(tr);
+      }
+      document.getElementById('summary').textContent =
+        `${found} de ${manifest.length} archivos cargados. Faltan ${manifest.length - found}.`;
+      document.getElementById('only-missing').onchange = (ev) => {
+        for (const tr of rows.children) tr.hidden = ev.target.checked && tr.dataset.loaded === 'true';
+      };
+    });
+  </script>
+</body>
+</html>

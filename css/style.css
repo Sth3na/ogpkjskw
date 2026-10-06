@@ -1,0 +1,78 @@
+:root {
+  --bg: #14161c;
+  --panel: #1f232d;
+  --text: #e8e8ec;
+  --muted: #9aa0ad;
+  --accent: #f28c28;
+  --ok: #5ee08a;
+  --bad: #ff6b6b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.4 system-ui, sans-serif;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--panel);
+}
+h1 { margin: 0; font-size: 20px; }
+h1 small { color: var(--muted); font-weight: normal; font-size: 14px; }
+nav a { color: var(--muted); margin-left: 12px; text-decoration: none; }
+nav a.on, nav a:hover { color: var(--accent); }
+main { max-width: 992px; margin: 0 auto; padding: 16px; }
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: #000;
+}
+.controls, .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.actions {
+  padding: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.actions[hidden] { display: none; }
+#actor-name { font-weight: bold; margin-right: 8px; }
+button {
+  background: #2c3240;
+  color: var(--text);
+  border: 1px solid #3b4253;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #1a1a1a; font-weight: bold; }
+button:disabled { opacity: 0.45; cursor: default; }
+.muted { color: var(--muted); }
+details { margin-top: 16px; background: var(--panel); border-radius: 8px; padding: 8px 12px; }
+#log { max-height: 260px; overflow-y: auto; margin: 8px 0 0; padding-left: 40px; font-size: 13px; }
+#log li.round { color: var(--accent); font-weight: bold; margin-top: 6px; }
+#log li.chase { color: #7fdbff; }
+#log li.end { color: var(--ok); font-weight: bold; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #2c3240; vertical-align: middle; }
+td code { font-size: 13px; word-break: break-all; }
+.thumb { width: 56px; height: 56px; object-fit: contain; background: #2c3240; border-radius: 4px; }
+.ok { color: var(--ok); }
+.bad { color: var(--bad); }
+.table-wrap { overflow-x: auto; }

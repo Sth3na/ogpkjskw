@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naruto Online HTML5 · Combate</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Naruto Online HTML5 <small>prototipo de combate</small></h1>
+    <nav><a href="index.html" class="on">Combate</a> <a href="revision.html">Revisión de assets</a></nav>
+  </header>
+
+  <main>
+    <canvas id="battle" width="960" height="540"></canvas>
+
+    <div id="actions" class="actions" hidden>
+      <span id="actor-name"></span>
+      <button id="btn-normal">Ataque normal</button>
+      <button id="btn-mystery" class="primary">Jutsu</button>
+    </div>
+
+    <div class="controls">
+      <button id="btn-auto">Automático: NO</button>
+      <button id="btn-speed">Velocidad x1</button>
+      <button id="btn-sound">Sonido: SÍ</button>
+      <button id="btn-restart">Reiniciar combate</button>
+      <span id="asset-summary" class="muted"></span>
+    </div>
+
+    <details open>
+      <summary>Registro del combate</summary>
+      <ol id="log"></ol>
+    </details>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/battle.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
